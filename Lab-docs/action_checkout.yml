@@ -1,0 +1,18 @@
+name: First_WorkFlow
+on: push
+
+jobs:
+    first_job:
+        runs-on: ubuntu-latest
+        steps:
+          - name: git checkout repo
+            uses: actions/checkout@v4
+              
+          - name: welcome message
+            run: echo "Hello"
+
+          - name: list_files
+            run: ls
+
+          - name: read file
+            run: cat README.md

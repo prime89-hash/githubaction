@@ -1,30 +1,35 @@
-name: First Workflow
-on: push
-jobs: 
-  first-job:
+name: Run Java App
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  run-app:
     runs-on: ubuntu-latest
     steps:
-      - name: git checkout repo
+      - name: Checkout repository
         uses: actions/checkout@v3
-      - name: set up Java
+
+      - name: Set up Java
         uses: actions/setup-java@v3
         with:
-           distribution: 'temurin'
-           java-version: '17'
+          distribution: 'temurin'
+          java-version: '17'
+
       - name: Compile Java application
         run: javac WelcomeApp.java
+
       - name: Run Java application
         run: java WelcomeApp &
-   
+
       - name: Wait for server to start
         run: sleep 2
-   
+
       - name: Test with curl
         run: curl http://localhost:8080
+
       - name: Sleep before exit
-        run: sleep 20           
-
-      - name: print goodbyee
-        run: echo "Done -Bye!"
-
-
+        run: sleep 20
